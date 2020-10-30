@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+const IntialState = {
+  email: "",
+  password: "",
+  email_err: "",
+  password_err: "",
+};
+
 class SignInForm extends Component {
   constructor() {
     super();
 
-    this.state = {
-      email: "",
-      password: "",
-    };
+    this.state = IntialState;
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,11 +28,37 @@ class SignInForm extends Component {
     });
   }
 
+  validate = () => {
+    let email_err = "";
+    let password_err = "";
+
+    if (this.state.email == "") {
+      email_err = "Please enter an email address";
+    }
+    if (email_err) {
+      this.setState({ email_err });
+      return false;
+    }
+
+    if (this.state.password_err == "") {
+      password_err = "Please enter a password";
+    }
+    if (password_err) {
+      this.setState({ password_err });
+      return false;
+    }
+
+    return true;
+  };
+
   handleSubmit(e) {
     e.preventDefault();
-
-    console.log("Following data is submited: ");
-    console.log(this.state);
+    const isValid = this.validate();
+    if (isValid) {
+      console.log("Following data is submited: ");
+      console.log(this.state);
+      this.setState(IntialState);
+    }
   }
   render() {
     return (
@@ -47,6 +77,7 @@ class SignInForm extends Component {
               value={this.state.email}
               onChange={this.handleChange}
             ></input>
+            <div>{this.state.email_err}</div>
           </div>
           <div className="FormField">
             <label className="FormField__Label" htmlFor="password">
@@ -61,6 +92,7 @@ class SignInForm extends Component {
               value={this.state.password}
               onChange={this.handleChange}
             ></input>
+            <div>{this.state.password_err}</div>
           </div>
 
           <div className="FormField">
