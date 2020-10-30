@@ -9,10 +9,9 @@ import {
 
 import SignUpForm from "./forms/SignUpForm";
 import SignInForm from "./forms/SignInForm";
-import footer from "./header-footer/footerpage";
+import Footer from "./header-footer/footer";
 
 import "./App.css";
-import footerpage from "./header-footer/footerpage";
 
 class App extends Component {
   render() {
@@ -61,9 +60,9 @@ class App extends Component {
             </div>
             <Route exact path="/sign-up" component={SignUpForm}></Route>
             <Route path="/sign-in" component={SignInForm}></Route>
+            <Footer />
           </div>
         </div>
-        <div ClassName="footer" Component={footerpage}></div>
       </Router>
     );
   }
