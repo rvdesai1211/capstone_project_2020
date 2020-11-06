@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+const IntialState = {
+  name: "",
+  email: "",
+  password: "",
+  name_err: "",
+  email_err: "",
+  password_err: "",
+};
 class SignUpForm extends Component {
   constructor() {
     super();
 
-    this.state = {
-      name: "",
-      email: "",
-      password: "",
-    };
+    this.state = IntialState;
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,11 +29,36 @@ class SignUpForm extends Component {
     });
   }
 
+  validate = () => {
+    let name_err = "";
+    let email_err = "";
+    let password_err = "";
+
+    if (this.state.email == "") {
+      email_err = "Please enter an email address";
+    }
+    if (email_err) {
+      this.setState({ email_err });
+      return false;
+    }
+
+    if (this.state.password_err == "") {
+      password_err = "Please enter a password";
+    }
+    if (password_err) {
+      this.setState({ password_err });
+      return false;
+    }
+
+    return true;
+  };
   handleSubmit(e) {
     e.preventDefault();
-
-    console.log("Following data is submited: ");
-    console.log(this.state);
+    const isValid = this.validate();
+    if (isValid) {
+      console.log("Following data is submited: ");
+      console.log(this.state);
+    }
   }
   render() {
     return (
