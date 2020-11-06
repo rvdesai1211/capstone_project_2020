@@ -40,13 +40,13 @@ class SignInForm extends Component {
       return false;
     }
 
-    if (this.state.password_err == "") {
-      password_err = "Please enter a password";
-    }
-    if (password_err) {
-      this.setState({ password_err });
-      return false;
-    }
+    // if (this.state.password_err == "") {
+    //   password_err = "Please enter a password";
+    // }
+    // if (password_err) {
+    //   this.setState({ password_err });
+    //   return false;
+    // }
 
     return true;
   };
